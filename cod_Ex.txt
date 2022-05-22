@@ -1,0 +1,42 @@
+//1.1. Mostre a lista de pessoas existentes, incluindo o seu código
+public static void listarPessoa() throws Exception{
+    String sql = "SELECT * from tb_pessoa";
+
+    try(
+        Connection conexao = new ConnectionFactory().getConnection();
+        PreparedStatement ps = conexao.prepareStatement(sql);
+        java.sql.ResultSet rs = ps.executeQuery();
+    ){
+        while(rs.next()){
+            rs.next();
+            int codigo = rs.getInt("codigo");
+            String nome = rs.getString("nome");
+
+            System.out.printf(
+            "código: %d, nome: %s\n",
+                codigo, nome
+            );
+        }
+    }
+}
+
+/*1.2. A cada variável pedida (nome, fone e e-mail) mostrar para o usuário qual é o 
+valor existente atualmente*/
+public static void listarAtualizar() throws Exception{
+    String sql = "SELECT * from tb_pessoa";
+
+    try(
+        Connection conexao = new ConnectionFactory().getConnection();
+        PreparedStatement ps = conexao.prepareStatement(sql);
+        java.sql.ResultSet rs = ps.executeQuery();
+    ){
+        String nome = rs.getString("nome");
+        String fone = rs.getString("fone");
+        String email = rs.getString("email");
+
+        System.out.printf(
+        "nome: %s, fone: %s, e-mail: %s\n",
+            nome, fone, email
+        );
+    }
+}
